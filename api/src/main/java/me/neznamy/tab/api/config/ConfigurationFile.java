@@ -3,6 +3,7 @@ package me.neznamy.tab.api.config;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -371,13 +372,15 @@ public abstract class ConfigurationFile {
 	 */
 	private List<String> detectHeader() throws IOException {
 		header = new ArrayList<>();
-		for (String line : Files.readAllLines(file.toPath())) {
-			if (line.startsWith("#")) {
-				header.add(line);
-			} else {
-				break;
+		try {
+			for ( String line : Files.readAllLines( file.toPath( ) ) ) {
+				if ( line.startsWith( "#" ) ) {
+					header.add( line );
+				} else {
+					break;
+				}
 			}
-		}
+		} catch( MalformedInputException ignored ){}
 		return header;
 	}
 

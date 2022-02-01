@@ -31,7 +31,7 @@ public class MySQL {
 	
 	private void openConnection() throws SQLException {
 		if (!isConnected()) {
-			con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+			con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database +"?autoReconnect=true&useSSL=false", username, password);
 			TAB.getInstance().getPlatform().sendConsoleMessage("&a[TAB] Successfully connected to MySQL", true);
 		}
 	}
